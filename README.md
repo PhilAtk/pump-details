@@ -18,6 +18,6 @@ Scores will be saved in localStorage for the website, so you won't have to scrap
 - Find if there's a good way to get around the MIME type mismatch without using a git mirror
 
 ## Reference
-The calculations for this are based off of the [Pump It Up Title Calculator](https://docs.google.com/spreadsheets/d/1O3xmKyy3kZlB87YcUIQvnQkA0FMCfhCoPXz2V-o7Lwk/edit#gid=0) spreadsheet.
+The calculations for this are based off of the [Pump It Up Title Calculator](https://docs.google.com/spreadsheets/d/1O3xmKyy3kZlB87YcUIQvnQkA0FMCfhCoPXz2V-o7Lwk/edit#gid=0) spreadsheet. The Pumbility cutoffs are based off speculation from the official PIU Discord Server. Thank you to VKIM for the additional grade cutoff values that I couldn't find elsewhere.
 
 The concept is largely based off of [vaddict](https://vaddict.b35.jp/), and how it loads the required code to scrape scores.
