@@ -3,9 +3,21 @@
 var records = [];
 
 var title_reqs = [
-	[ // Top 50: Max Pumbility
-	// TODO: Different Pumbility plate colors?
-		{title: "Pumbility", points: 107760}
+	[ // Pumbility
+		{title: "Green", points: 0},
+		{title: "Yellow", points: 10000}, // Unsure
+		{title: "Red", points: 20000}, // Unsure, > 16k
+		{title: "Bronze", points: 30000},  // Unsure, > 23k
+		{title: "Silver", points: 40000},  // Unsure, > 32k
+		{title: "Gold", points: 50000},
+		{title: "Platinum", points: 65000}, // Unsure, 60k < x < 72k
+		{title: "Max Pumbility", 
+			points:
+				CalcPoints(28, 1000000) * 2 + 
+				CalcPoints(27, 1000000) * 6 + 
+				CalcPoints(26, 1000000) * 25 + 
+				CalcPoints(25, 1000000) * 17
+		}
 	],[],[],[],[],[],[],[],[],[],
 	[ // 10s
 		{title: "Intermediate 1", points: 2000}
@@ -97,17 +109,22 @@ var title_reqs = [
 
 function CalcPoints(level, score) {
 	function PointMultiplier(score) {
-		if (score >= 995000) return 1.5;
-		if (score >= 990000) return 1.44;
-		if (score >= 985000) return 1.38;
-		if (score >= 980000) return 1.32;
-		if (score >= 975000) return 1.26;
-		if (score >= 970000) return 1.2;
-		if (score >= 960000) return 1.1500000000000001; // I hate floats
-		if (score >= 950000) return 1.1;
-		if (score >= 925000) return 1.05;
-		if (score >= 900000) return 1
-		return 0;
+		if (score >= 995000) return 1.5; // SSS+
+		if (score >= 990000) return 1.44; // SSS
+		if (score >= 985000) return 1.38; // SS+
+		if (score >= 980000) return 1.32; // SS
+		if (score >= 975000) return 1.26; // S+
+		if (score >= 970000) return 1.2; // S
+		if (score >= 960000) return 1.1500000000000001; // AAA+
+		if (score >= 950000) return 1.1; // AAA
+		if (score >= 925000) return 1.05; // AA+
+		if (score >= 900000) return 1 // AA
+		if (score >= 825000) return 0.9 // A+
+		if (score >= 750000) return 0.8 // A
+		if (score >= 650000) return 0.7 // B
+		if (score >= 550000) return 0.6 // C
+		if (score >= 450000) return 0.5 // D
+		return 0.4 // F
 	}
 
 	function BasePoints(level) {
@@ -278,18 +295,18 @@ function DisplayInfo() {
 	// Score Average Text
 	// TODO: Not being added for some reason?
 	let scoreAvg = document.createElement("span");
+	scoreAvg.setAttribute("style", "color: #FFFFFF;");
 	function CalcAvg() {
-		if (level_select.value > 0) {
+		if (level_select.value > 0 && records[level_select.value].length > 0) {
 			let avg = 0;
 			records[level_select.value].forEach(
 				record => avg += record.score);
-			avg = avg / records[level_select.value].length;
+			avg = Math.round(avg / records[level_select.value].length);
 
 			scoreAvg.textContent = "Avg: " + avg;
 		}
 
 		else {
-			console.log("Nothing");
 			scoreAvg.textContent = "";
 		}		
 	}
