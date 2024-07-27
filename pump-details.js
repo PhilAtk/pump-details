@@ -293,7 +293,6 @@ function DisplayInfo() {
 	optionsHeader.appendChild(level_select);
 
 	// Score Average Text
-	// TODO: Not being added for some reason?
 	let scoreAvg = document.createElement("span");
 	scoreAvg.setAttribute("style", "color: #FFFFFF;");
 	function CalcAvg() {
