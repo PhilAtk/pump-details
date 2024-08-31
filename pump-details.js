@@ -14,9 +14,9 @@ var title_reqs = [
 		{title: "Max Pumbility", 
 			points:
 				CalcPoints(28, 1000000) * 2 + 
-				CalcPoints(27, 1000000) * 6 + 
+				CalcPoints(27, 1000000) * 7 + 
 				CalcPoints(26, 1000000) * 25 + 
-				CalcPoints(25, 1000000) * 17
+				CalcPoints(25, 1000000) * 16
 		}
 	],[],[],[],[],[],[],[],[],[],
 	[ // 10s
