@@ -101,10 +101,11 @@ var title_reqs = [
 		{title: "Co-op Lvl 10", points: 300000},
 		{title: "Co-op Advanced", points: 330000},
 		{title: "Co-op Expert", points: 360000},
-		{title: "Max Co-op Rating", 
-			points:	CalcPoints(29, 1000000) * 127},
+		{
+			title: "Max Co-op Rating", 
+			points:	CalcPoints(29, 1000000) * 127
+		},
 		{title: "Co-op Master", points: 390000},
-		127
 	]
 ];
 
