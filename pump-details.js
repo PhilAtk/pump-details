@@ -155,9 +155,16 @@ function Scrape() {
 	wrapper.innerHTML = request.responseText; // Pack the response to parse
 
 	// Calculate the number of pages to pull from the total scores
-	var num_scores = wrapper.getElementsByClassName("board_search")[0].childNodes[1].textContent.split(".")[1];
-	var num_pages = Math.ceil(num_scores/12);
-
+	try {
+		var num_scores = wrapper.getElementsByClassName("board_search")[0].childNodes[1].textContent.split(".")[1];
+		var num_pages = Math.ceil(num_scores/12);
+	}
+	catch {
+		// Not logged in
+		window.alert("Please log in and try again");
+		return;
+	}
+	
 	// Init the records array to prepare to push to it
 	for (var i=0; i<30; i++) {
 		records[i] = new Array();
