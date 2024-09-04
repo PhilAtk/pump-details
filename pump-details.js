@@ -141,103 +141,103 @@ function CalcPoints(level, score) {
 }
 
 function Scrape() {
-	if (location.href.indexOf("my_best_score.php") != -1) {
-		// TODO: Be able to pull a single category
+	// TODO: Check if logged in
+	// TODO: Be able to pull a single category
 
-		const SCORE_URL = "https://piugame.com/my_page/my_best_score.php?lv=&&page=";
+	const SCORE_URL = "https://piugame.com/my_page/my_best_score.php?lv=&&page=";
 
-		// Calculate the number of pages to pull from the total scores
-		var num_scores = document.getElementsByClassName("board_search")[0].childNodes[1].textContent.split(".")[1];
-		var num_pages = Math.ceil(num_scores/12);
+	// TODO: Make this async
+	var request = new XMLHttpRequest();
+	request.open("GET", SCORE_URL, false);
+	request.send(null);
 
-		// Init the records array to prepare to push to it
-		for (var i=0; i<30; i++) {
-			records[i] = new Array();
-		}
+	var wrapper = document.createElement("div");
+	wrapper.innerHTML = request.responseText; // Pack the response to parse
 
-		// Request each page
-		for (i=1; i<=num_pages; i++) {
-			console.log("Pulling page: " + i + " / " + num_pages);
+	// Calculate the number of pages to pull from the total scores
+	var num_scores = wrapper.getElementsByClassName("board_search")[0].childNodes[1].textContent.split(".")[1];
+	var num_pages = Math.ceil(num_scores/12);
 
-			// TODO: Make this async
-			var request = new XMLHttpRequest();
-			request.open("GET", SCORE_URL + i, false);
-			request.send(null);
+	// Init the records array to prepare to push to it
+	for (var i=0; i<30; i++) {
+		records[i] = new Array();
+	}
 
-			// Pack the response in a div to aid in parsing
-			var wrapper = document.createElement("div");
-			wrapper.innerHTML = request.responseText;
+	// Request each page
+	for (i=1; i<=num_pages; i++) {
+		console.log("Pulling page: " + i + " / " + num_pages);
 
-			// Pull out the scorelist for this page
-			var list = wrapper.getElementsByClassName("my_best_scoreList")[0];
-			
-			for (var j=0; j<list.children.length; j++) {
-				var entry = list.children[j];
+		// TODO: Make this async
+		request = new XMLHttpRequest();
+		request.open("GET", SCORE_URL + i, false);
+		request.send(null);
 		
-				var level = 0;
+		wrapper = document.createElement("div");
+		wrapper.innerHTML = request.responseText;
 
-				// What type of score is this?
-				var type = entry.getElementsByClassName("stepBall_in")[0].style.backgroundImage.split("/")[6][0].toUpperCase();
-
-				// Grab the second digit of the level
-				var lvlStr2 = entry.getElementsByClassName("imG")[1].children[0].src.split("_")[3][0];
-
-				if (type == 'C') {
-					level = 29; // Co-op
-					type = "x" + lvlStr2;
-				}
-				else {
-					// Grab the first digit of the level
-					var lvlStr1 = entry.getElementsByClassName("imG")[0].children[0].src.split("_")[3][0];
-
-					lvlStr1 = Number(lvlStr1);
-					lvlStr2 = Number(lvlStr2);
-			
-					// Calculate the difficulty
-					level = 10*lvlStr1 + lvlStr2;
-				}
-				
-				// Find the song name
-				var song = entry.getElementsByClassName("song_name")[0].textContent;	
-
-				// Find the score
-				var score = Number(entry.getElementsByClassName("num")[0].textContent.replace(/,/g, ''));
+		// Pull out the scorelist for this page
+		var list = wrapper.getElementsByClassName("my_best_scoreList")[0];
 		
-				// Save current record
-				var record = {
-					song: song,
-					type: type,
-					level: level,
-					score: score,
-					points: CalcPoints(level, score)
-				};
+		for (var j=0; j<list.children.length; j++) {
+			var entry = list.children[j];
+	
+			var level = 0;
 
-				records[level].push(record);
-				if (level >= 10 && level < 29) {
-					records[0].push(record);
-				}
+			// What type of score is this?
+			var type = entry.getElementsByClassName("stepBall_in")[0].style.backgroundImage.split("/")[6][0].toUpperCase();
+
+			// Grab the second digit of the level
+			var lvlStr2 = entry.getElementsByClassName("imG")[1].children[0].src.split("_")[3][0];
+
+			if (type == 'C') {
+				level = 29; // Co-op
+				type = "x" + lvlStr2;
+			}
+			else {
+				// Grab the first digit of the level
+				var lvlStr1 = entry.getElementsByClassName("imG")[0].children[0].src.split("_")[3][0];
+
+				lvlStr1 = Number(lvlStr1);
+				lvlStr2 = Number(lvlStr2);
+		
+				// Calculate the difficulty
+				level = 10*lvlStr1 + lvlStr2;
+			}
+			
+			// Find the song name
+			var song = entry.getElementsByClassName("song_name")[0].textContent;	
+
+			// Find the score
+			var score = Number(entry.getElementsByClassName("num")[0].textContent.replace(/,/g, ''));
+	
+			// Save current record
+			var record = {
+				song: song,
+				type: type,
+				level: level,
+				score: score,
+				points: CalcPoints(level, score)
 			};
-		}
 
-		records.forEach(range => {
-			range.sort((songA, songB) => {
-				return (songA.level == songB.level) ?
-					songB.score - songA.score :
-					songB.points - songA.points;
-				}
-			);
-		});
-
-		localStorage.setItem("records", JSON.stringify(records));
-
-		window.alert("Script Finished");
+			records[level].push(record);
+			if (level >= 10 && level < 29) {
+				records[0].push(record);
+			}
+		};
 	}
 
-	else {
-		window.alert("Could not load scores. Please navigate to https://piugame.com/my_page/my_best_score.php and run the script again");
+	records.forEach(range => {
+		range.sort((songA, songB) => {
+			return (songA.level == songB.level) ?
+				songB.score - songA.score :
+				songB.points - songA.points;
+			}
+		);
+	});
 
-		CAN_DISPLAY = false;
-	}
+	localStorage.setItem("records", JSON.stringify(records));
+
+	window.alert("Script Finished");
 }
 
 function ExitOverlay() {
@@ -453,8 +453,6 @@ function DisplayInfo() {
 
 // ============================================================================
 
-var CAN_DISPLAY = true;
-
 if (localStorage["records"] == null) {
 	window.alert("Fetching records");
 	Scrape();
@@ -463,6 +461,4 @@ else {
 	records = JSON.parse(localStorage["records"]);
 }
 
-if (CAN_DISPLAY) {
-	DisplayInfo();
-}
+DisplayInfo();
