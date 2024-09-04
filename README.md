@@ -11,6 +11,7 @@ Then access the bookmark while logged in at the [Pump It Up Website](https://piu
 Scores will be saved in localStorage for the website, so you won't have to scrape old scores again on repeat visits.
 
 ## TODO
+- Add a check for if user is logged in or not (and throw appropriate messages if not)
 - Screenshot for this page
 - Make score fetching async (it currently freezes the page while fetching)
 - Display more ranks required to earn a title than just A and SSS+
