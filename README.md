@@ -13,6 +13,7 @@ Scores will be saved in localStorage for the website, so you won't have to scrap
 ## TODO
 - Screenshot for this page
 - Make score fetching async (it currently freezes the page while fetching)
+- Add score export option
 - Display more ranks required to earn a title than just A and SSS+
 - Find if there's a good way to get around the MIME type mismatch without using a git mirror
 
