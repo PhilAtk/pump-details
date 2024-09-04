@@ -6,9 +6,9 @@ To use Pump Details, create a bookmark containing the following code as the URL:
 javascript:(function(){var d=document;var e=d.createElement('script');e.src='https://cdn.jsdelivr.net/gh/PhilAtk/pump-details/pump-details.js';d.getElementsByTagName('head')[0].appendChild(e);})()
 ```
 
-Then access the bookmark while on the [My Best Score](https://piugame.com/my_page/my_best_score.php) page
+Then access the bookmark while logged in at the [Pump It Up Website](https://piugame.com/)
 
-Scores will be saved in localStorage for the website, so you won't have to scrape scores again on repeat visits (unless you want to fetch newer scores).
+Scores will be saved in localStorage for the website, so you won't have to scrape old scores again on repeat visits.
 
 ## TODO
 - Screenshot for this page
