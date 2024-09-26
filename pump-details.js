@@ -15,8 +15,8 @@ var title_reqs = [
 			points:
 				CalcPoints(28, 1000000) * 2 + 
 				CalcPoints(27, 1000000) * 7 + 
-				CalcPoints(26, 1000000) * 25 + 
-				CalcPoints(25, 1000000) * 16
+				CalcPoints(26, 1000000) * 26 + 
+				CalcPoints(25, 1000000) * 15
 		}
 	],[],[],[],[],[],[],[],[],[],
 	[ // 10s
