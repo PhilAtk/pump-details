@@ -103,7 +103,7 @@ var title_reqs = [
 		{title: "Co-op Expert", points: 360000},
 		{
 			title: "Max Co-op Rating", 
-			points:	CalcPoints(29, 1000000) * 127
+			points:	CalcPoints(29, 1000000) * 131
 		},
 		{title: "Co-op Master", points: 390000},
 	]
