@@ -14,9 +14,9 @@ var title_reqs = [
 		{title: "Max Pumbility", 
 			points:
 				CalcPoints(28, 1000000) * 2 + 
-				CalcPoints(27, 1000000) * 7 + 
-				CalcPoints(26, 1000000) * 30 + 
-				CalcPoints(25, 1000000) * 11
+				CalcPoints(27, 1000000) * 8 + 
+				CalcPoints(26, 1000000) * 32 + 
+				CalcPoints(25, 1000000) * 8
 		}
 	],[],[],[],[],[],[],[],[],[],
 	[ // 10s
@@ -104,7 +104,7 @@ var title_reqs = [
 		{title: "Co-op Master", points: 390000},
 		{
 			title: "Max Co-op Rating", 
-			points:	CalcPoints(29, 1000000) * 136
+			points:	CalcPoints(29, 1000000) * 139
 		}
 	]
 ];
